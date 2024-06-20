@@ -1,0 +1,36 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+<div class="login-bg">
+<div class="container full-height d-flex justify-content-center align-items-center">
+    <div class="col-sm-6">
+        <h2>Login</h2>
+
+        {% if form.non_field_errors %}
+        <small class="text-danger">
+            {{form.non_field_errors.as_ul}}
+        </small>
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+              <div class="form-group">
+                 <label for="{{form.username.id_for_label}}">Username</label><br>
+                 <input class="sm" type="text" name="{{form.username.name}}" class="form-control" value="{{form.username.value}}">
+                 <span class="text-danger" >{{form.username.errors}}</span>
+              </div>
+              <div class="form-group">
+                <label for="{{form.password.id_for_label}}">Password</label><br>
+                <input class="sm" type="password" name="{{form.password.name}}" class="form-control" value="{{form.password.value}}">
+                <span class="text-danger" >{{form.password.errors}}</span>
+             </div>
+             <button type="submit" class="btn-btn-dark">Login</button>
+
+             <button id="login" type="login"><a href="{% url 'register' %}">Register</a></button>
+             
+        </form>
+    </div>
+</div>
+</div>
+
+{% endblock %}
